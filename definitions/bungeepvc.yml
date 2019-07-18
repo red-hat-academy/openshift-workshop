@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+ name: bungeeclaim
+spec:
+ accessModes:
+   - ReadWriteOnce
+ resources:
+  requests:
+   storage: 5Gi
+selector:
+ name: bungee

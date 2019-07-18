@@ -1,9 +1,9 @@
 # Introduction
 > Objective: Make data persistent in OpenShift.
 
-So now we have the game server running and available so we are able to connect to it. Only problem is now that our configuration, and world isn't saved when a new deployment of the pod is made.
+So now we have the game server running. Only problem is now that our configuration, and world isn't saved when a new deployment of the pod is made.
 
-This may seem strange but that is because the containers used in the cluster are ephemeral by nature; meaning that any data they hold is temporary. This is perfect for services that are **stateless**, or don't need to store data, like web servers, but not so good for **stateful** services like databases.
+This may seem strange but that is because the containers used in the cluster are ephemeral by nature; meaning that any data they hold is temporary. This is perfect for services that are **stateless**, or don't need to store data, like web servers, but not so good for **stateful** services like databases or well, minecraft servers.
 
 # Persistent Volumes
 So a our Minecraft server is stateful. How do we save the data?
@@ -32,15 +32,15 @@ You will now create the folder for the volume to mount to
 
 Create a new directory called hub inside a directory called minecraft.
 
-`mkdir -p /mnt/sda1/var/lib/minishift/openshift.local.volumes/pv/minecraft/hub`
+`mkdir -p /mnt/sda1/var/lib/minishift/openshift.local.volumes/pv/minecraft-server/hub`
 
 Then set it's permission to rwx for user group and other.
 
-`chmod 777 -R /mnt/sda1/var/lib/minishift/openshift.local.volumes/pv/minecraft`
+`chmod 777 -R /mnt/sda1/var/lib/minishift/openshift.local.volumes/pv`
 
 Now that the directory is accessible you there is one more thing you have to do. SELinux, by default doesn't allow container volumes to access storage on their host machine. So you have to change the context of the folder to allow it. 
 
-`chcon -Rt svirt_sandbox_file_t /mnt/sda1/var/lib/minishift/openshift.local.volumes/pv/minecraft`
+`chcon -Rt svirt_sandbox_file_t /mnt/sda1/var/lib/minishift/openshift.local.volumes/pv`
 ***
 ### Persistent Volume:
 Next you have to mount a **PersistentVolume** to the directory you just created making is accessible by openoshift.
@@ -65,8 +65,8 @@ spec:
   storage: 5Gi
  accessModes:
   - ReadWriteOnce
-hostPath:
- path: /mnt/sada1/var/lib/minishfit/openshift.local.volumes/pv/registry
+ hostPath:
+  path: /mnt/sada1/var/lib/minishfit/openshift.local.volumes/pv/minecraft-server/hub
 ```
 
 * Now add this definition for the persistent volume to the minecraft-server project
@@ -82,7 +82,7 @@ To use this volume you first have to claim it. Using a **PersistentVolumeClaim**
 * First you'll need to create another new file called `hubpvc.yml`
 * Edit this file and enter the following:
 ```
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
  name: hubclaim
@@ -103,7 +103,7 @@ selector:
 ### Patching the Deployment Config
 Now that you've made the pvc you have to add it to the hub pod's deployment config.
 
-`oc get volume dc/hub --add --name=hub-storage -t pvc --claim-name=hubclaim --overwrite`
+`oc set volume dc/hub --add --name=hub-storage -t pvc --claim-name=hubclaim --overwrite`
 
 Be sure to replace `hub-storage` with the volume you noted earlier from the deployment config that mounts to `/data` in the pod.
 
@@ -137,3 +137,7 @@ To go over the steps in brief again you:
 2) Created a PersistentVolume
 3) Created a PersistentVolumeClaim
 4) Added the PersistentVolumeClaim to the deployment config of the hub pod
+
+Now repeat these steps for the other pods `smp, bungee` changing the name hub appropriately
+
+For bungee the container directory is `/server` not `/data`
