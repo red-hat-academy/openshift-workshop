@@ -1,7 +1,7 @@
 # Initial Setup
-> How to setup the workshop enviornment
+> Setting up the workshop enviornment.
 
-This lab is designed to work with Minishift but it will also work with any OpenShift or OKD derivative with little modification.
+This workshop is designed to work with Minishift but it will also work with any OpenShift or OKD derivative with little modification.
 
 This is not a guide for setting up Minishift but you can find one [here](https://docs.okd.io/latest/minishift/getting-started/installing.html)
 
