@@ -1,4 +1,3 @@
-| [Next](./background.md) |
 # Learning OpenShift with Minecraft
 It has been said that games are a new avenue to learning technology [(Command Line Heros Podcast S3E2)](https://www.redhat.com/en/command-line-heroes/season-3/learning-the-basics). In this workshop you will learn how to deploy and configure an application in OpenShift.
 
@@ -36,5 +35,5 @@ All software used in this workshop is free, opensource, and well documented. Lin
 
 # Hardware Requirements
 By default the Minishift VM is allocated 4GB of ram 2 CPU cores and 20GB of hard drive space. You will want to have more than this however in order to leave room for other processes running on your computer.
-
-| [Next](./background.md) |
+***
+>[Continue with Workshop](https://github.com/kloct/openshift-workshop/wiki/home)
