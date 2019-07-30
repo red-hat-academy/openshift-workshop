@@ -3,7 +3,7 @@ It has been said that games are a new avenue to learning technology [(Command Li
 
 [Minecraft](https://www.minecraft.net/) is a sandbox adventure game that has become one of the most well known video games in the world. One of the things that makes this game unique besides it's infinite worlds and 3rd party modding support is the ability for you to run your own game servers in multiplayer.
 
-This workshop goes through how to deploy a multi-server network, supporting the java edition of the game, using two world servers and a reverse proxy allowing users to connect to either one of the worlds.
+This workshop goes through how to deploy a multi-server network, supporting the java edition of the game, using two world servers and a reverse proxy; allowing users to connect to either one of the worlds.
 
 # Outline
 The following will be covered in this workshop
