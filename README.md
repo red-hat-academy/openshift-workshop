@@ -37,6 +37,6 @@ All software used in this workshop is free, opensource, and well documented. Lin
 # Hardware Requirements
 In order to run this workshop it is recommended to have at least 8GB of RAM, 4 CPU cores and 20GB of free hard drive space. Overhead will be necessary for running the operating system, hypervisor, and other applications on the host computer during the workshop.
 
-The Minishift virtual machine is configured by default with 4GB of RAM, 2 CPU cores and 20GB of hard drive space (this is adjustable as described in “[initial setup](https://github.com/kloct/openshift-workshop/wiki/initial-setup)”). 
+The Minishift virtual machine is configured by default with 4GB of RAM, 2 CPU cores and 20GB of hard drive space (this is adjustable as described in “[initial setup](https://github.com/red-hat-academy/openshift-workshop/wiki/initial-setup)”). 
 ***
->[Continue with Workshop](https://github.com/kloct/openshift-workshop/wiki/home)
+>[Continue with Workshop](https://github.com/red-hat-academy/openshift-workshop/wiki/home)
